@@ -7,14 +7,14 @@ const Question = (props) => {
 
   const getStyle = (answer) => {
     let buttonStyles = {backgroundColor: "#F5F7FB"} 
-    //incorrect
+    //style incorrect answer
     if (answer===currentAnswer && currentAnswer!==decodeURIComponent(props.correctAnswer)) {
       buttonStyles = {
         backgroundColor: "#F8BCBC",
         borderColor: "#F8BCBC",
       }
     } 
-    // correct
+    //style correct answer
     if (answer===decodeURIComponent(props.correctAnswer)) {
       buttonStyles = {
         backgroundColor: "#94D7A2",
@@ -28,10 +28,11 @@ const Question = (props) => {
   const chosenStyle = (answer) => {
     let style = {backgroundColor: "#F5F7FB"}
     if (answer===currentAnswer) {
-      style = {backgroundColor: "#D6DBF5",
-              borderColor: "#D6DBF5"}
+      style = {
+        backgroundColor: "#D6DBF5",
+        borderColor: "#D6DBF5"
       }
-
+    }
     return style
   }
 
