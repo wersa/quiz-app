@@ -41,8 +41,7 @@ body {
 
 .App {
   margin: 0;
-  background: url("../public/images/blobs.png") right top no-repeat, fixed url(../public/images/blobs-bottom.png) left bottom no-repeat;
-  /* height: 100%; */
+  background:fixed url("../public/images/blobs.png") right top no-repeat, fixed url(../public/images/blobs-bottom.png) left bottom no-repeat;
 }
 
 .startPage {
@@ -139,4 +138,18 @@ body {
 
 .resultOptionButton {
   opacity: 0.5;
+}
+
+@media screen and (max-width: 768px) {
+  .question-options {
+    /* width: 100%; */
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .optionButton {
+    width: 75%;
+    margin: 0.5rem;
+  }
 }
