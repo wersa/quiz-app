@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Question from "./components/Question";
-import { nanoid } from 'nanoid'
 
 
 function App() {
@@ -15,38 +14,36 @@ function App() {
     fetch("https://opentdb.com/api.php?amount=5&encode=url3986")
       .then((res) => res.json())
       .then((data) => setQuiz(getQuestions(data.results)));
-    console.log("got quiz details");
+      const getQuestions = (data) => {
+        const questionsArray = [];
+        const answersArray = [];
+    
+        data.map((el) => {
+          answersArray.push({
+            correct: decodeURIComponent(el.correct_answer),
+            chosen: "",
+          });
+          const options = el.incorrect_answers;
+          options.push(el.correct_answer);
+          shuffle(options);
+          return questionsArray.push({
+            correct: el.correct_answer,
+            incorrect: options,
+            question: decodeURIComponent(el.question),
+          });
+        });
+        // setQuiz(questionsArray)
+        setChosenOption(answersArray);
+        return questionsArray;
+      };
+    
+      const shuffle = (array) => {
+        array.sort(() => Math.random() - 0.5);
+      };
+
   }, [newQuiz]);
 
-  const getQuestions = (data) => {
-    const questionsArray = [];
-    const answersArray = [];
-    data.map((el) => {
-      answersArray.push({
-        correct: decodeURIComponent(el.correct_answer),
-        chosen: "",
-      });
-      const options = el.incorrect_answers;
-      options.push(el.correct_answer);
-      shuffle(options);
-      return questionsArray.push({
-        correct: el.correct_answer,
-        incorrect: options,
-        question: decodeURIComponent(el.question),
-      });
-    });
-    // setQuiz(questionsArray)
-    setChosenOption(answersArray);
-    return questionsArray;
-  };
-
-  const shuffle = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  };
+  
 
   const handleOnHold = (chosen, questionIndex) => {
     setChosenOption((prevOption) => {
