@@ -1,11 +1,13 @@
 import { useState } from "react"
+// import { nanoid } from 'nanoid'
+
 
 const Question = (props) => {
   const options = props.answers
   const [currentAnswer, setCurrentAnswer] = useState('')
 
 
-  const getStyle = (answer) => {
+  const decideStyle = (answer) => {
     let buttonStyles = {backgroundColor: "#F5F7FB"} 
     //style incorrect answer
     if (answer===currentAnswer && currentAnswer!==decodeURIComponent(props.correctAnswer)) {
@@ -36,10 +38,23 @@ const Question = (props) => {
     return style
   }
 
+  const usualStyle = {backgroundColor: "#F5F7FB"};
+  
+  const getStyles = (option) => {
+    let style = usualStyle;
+    if (props.isNewGame) {
+      return decideStyle(option);
+    }
+    style = props.over ? decideStyle(option) : chosenStyle(option);
+    return style;
+  }
+
   const getOptions = options.map(el => {
     const option = decodeURIComponent(el)
-    const styles = (props.over) ? getStyle(option) : chosenStyle(option)
-    return <button className={`optionButton ${props.over && "resultOptionButton"}`} 
+    let styles = getStyles(option);
+  
+    return <button className={`optionButton ${(props.over || props.isNewGame) && "resultOptionButton"}`} 
+    key={option}
         disabled={props.over ? true : false}
         onClick={() => {
           setCurrentAnswer(option)
