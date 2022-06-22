@@ -1,21 +1,20 @@
-import QuizPage from "./components/QuizPage";
-import StartPage from "./components/StartPage";
-import { Route, Routes } from "react-router-dom";
+import React, { Suspense } from "react";
+import Loader from "./components/Loader";
+import { Route, Routes, Navigate } from "react-router-dom";
 
+const QuizPage = React.lazy(() => import("./components/QuizPage"));
+const StartPage = React.lazy(() => import("./components/StartPage"));
 
 function App() {
-
   return (
     <div className="App">
-    <Routes>
-    <Route path="/" element={<StartPage />} />
-
-      <Route path="/start" element={<StartPage />}>
-        
-      </Route>
-      <Route path="/quiz" element={<QuizPage />}>
-      </Route>
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Navigate to="/start" replace />} />
+          <Route path="/start" element={<StartPage />} />
+          <Route path="/quiz" element={<QuizPage />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 }

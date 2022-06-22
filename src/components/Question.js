@@ -1,6 +1,8 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const Question = (props) => {
+  console.log('q&a component');
+
   const options = props.answers;
   const correctOption = decodeURIComponent(props.correctAnswer);
   const [currentAnswer, setCurrentAnswer] = useState("");
@@ -41,7 +43,6 @@ const Question = (props) => {
           setCurrentAnswer(option);
           props.handleClick(option, props.questionNumber);
         }}
-        // style={styles}
       >
         {option}
       </button>
@@ -56,4 +57,4 @@ const Question = (props) => {
   );
 };
 
-export default Question;
+export default React.memo(Question);
