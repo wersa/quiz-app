@@ -1,0 +1,209 @@
+@use "./styles/reset";
+@use "./styles/components";
+
+.button {
+  background-color: var(--purple);
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 1.25rem;
+  border: none;
+  border-radius: 15px;
+  color: var(--lgt-white);
+  padding: 16px 40px;
+}
+
+.button:active,
+.button:hover {
+  background-color: var(--lgt-white);
+  color: var(--purple);
+  border: 2px solid var(--purple);
+  box-shadow: 3px 3px 15px rgba(24, 1, 54, 0.18);
+}
+
+.App {
+  background: fixed url("../public/images/blobs.png") right top no-repeat,
+    fixed url(../public/images/blobs-bottom.png) left bottom no-repeat;
+  font-family: var(--font-stack);
+  color: var(--drk-purple);
+  background-color: var(--lgt-white);
+}
+
+.startPage {
+  margin: 0 auto;
+  min-height: 100vh;
+  max-width: 500px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    margin-bottom: 10px;
+    font-family: Karla;
+    font-weight: bold;
+    font-size: 2.5rem;
+    line-height: 2.3rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+  }
+
+  &__tools {
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    select {
+      margin-left: 0.5rem;
+      margin-top: 1rem;
+      padding: 0.2rem 0.5rem;
+      font-family: var(--font-stack);
+      color: var(--drk-purple);
+      max-width: 12rem;
+      background-color: var(--lgt-white);
+      border: 1.3px solid var(--purple);
+      border-radius: 7px;
+    }
+
+    select:active,
+    select:focus {
+      border: 1.3px solid var(--purple);
+      background-color: rgb(251, 246, 255);
+    }
+  }
+}
+
+.start-button {
+  margin-top: 30px;
+  padding: 16px 40px;
+}
+
+.quizPage {
+  min-height: 100vh;
+  padding: 3rem;
+  position: relative;
+}
+
+.back-button {
+  padding: 0rem;
+  height: 34px;
+  width: 34px;
+  border-radius: 17px;
+  font-size: 1rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  img {
+    padding-top: 0.25rem;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+  }
+
+  &:hover {
+    background-color: var(--purple);
+  }
+}
+
+.quiz-form {
+  max-width: 700px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quiz-button {
+  align-self: center;
+}
+
+.quiz-result {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+
+  h3 {
+    font-family: var(--font-stack);
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 0.9rem;
+  }
+}
+
+.question-container {
+  padding-bottom: 20px;
+  border-bottom: 0.8px solid var(--lgt-purple);
+
+  h3 {
+    margin-bottom: 20px;
+    font-family: Karla;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.5rem;
+    line-height: 1.4rem;
+  }
+}
+
+.question-options {
+  display: flex;
+}
+
+.optionButton {
+  padding: 6px 9px;
+  margin-right: 15px;
+  min-width: 66px;
+  cursor: pointer;
+  color: var(--drk-purple);
+  font-family: var(--font-stack);
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 0.95rem;
+  border: 1.3px solid var(--purple);
+  border-radius: 10px;
+}
+
+.resultOptionButton {
+  opacity: 0.5;
+}
+
+.usual {
+  background-color: var(--lgt-white);
+}
+
+.chosen {
+  background-color: var(--lgt-purple);
+  border-color: var(--lgt-purple);
+}
+
+.incorrect {
+  background-color: var(--lgt-pink);
+  border-color: var(--lgt-pink);
+}
+
+.correct {
+  background-color: var(--green);
+  border-color: var(--green);
+  opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .question-options {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .optionButton {
+    width: 60%;
+    margin: 0.5rem;
+    min-height: 2.5rem;
+    border-radius: 17px;
+    font-size: 1rem;
+  }
+}
